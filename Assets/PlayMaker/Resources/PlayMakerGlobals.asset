@@ -1,0 +1,294 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 42938266, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: PlayMakerGlobals
+  m_EditorClassIdentifier: 
+  variables:
+    floatVariables:
+    - useVariable: 1
+      name: WaitRandomMin
+      tooltip: Navmesh wait before take another direction
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: WaitRandomMax
+      tooltip: Navmesh wait before take another direction
+      showInInspector: 0
+      networkSync: 0
+      value: 4
+    - useVariable: 1
+      name: EnemyMaxSpeed
+      tooltip: When chasing, the max velocity for enemies (def.=5.5)
+      showInInspector: 0
+      networkSync: 0
+      value: 7
+    - useVariable: 1
+      name: EnemyMaxDistRaycast
+      tooltip: Max distance for Line of Sight FSM config (def.=6)
+      showInInspector: 0
+      networkSync: 0
+      value: 9
+    - useVariable: 1
+      name: GateWaitRandomMin
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 1
+    - useVariable: 1
+      name: GateWaitRandomMax
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 7
+    - useVariable: 1
+      name: PowerBoostDuration
+      tooltip: Duration of a powerboost (invisibility)
+      showInInspector: 0
+      networkSync: 0
+      value: 3.5
+    intVariables:
+    - useVariable: 1
+      name: Level
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 1
+    - useVariable: 1
+      name: Energy
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 100
+    - useVariable: 1
+      name: EnemyDamage1
+      tooltip: 'Default: 5'
+      showInInspector: 0
+      networkSync: 0
+      value: 15
+    - useVariable: 1
+      name: Exercise
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: ScoreL1
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: ScoreL2
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: ScoreL3
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: HiddenObjectValue
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 5
+    - useVariable: 1
+      name: ExerciseFailValue
+      tooltip: Puntaje a restar con cada respuesta fallida
+      showInInspector: 0
+      networkSync: 0
+      value: -5
+    - useVariable: 1
+      name: ExerciseCorrectValue
+      tooltip: Puntaje a sumar con cada respuesta correcta
+      showInInspector: 0
+      networkSync: 0
+      value: 20
+    - useVariable: 1
+      name: Retries
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: HiddenObjectsFound
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: Score
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: PowerboxEnergyValue
+      tooltip: Energy that increase the current player energy level
+      showInInspector: 0
+      networkSync: 0
+      value: 10
+    - useVariable: 1
+      name: PowerBoost
+      tooltip: Boost power. Default = 2
+      showInInspector: 0
+      networkSync: 0
+      value: 2
+    - useVariable: 1
+      name: ProgressCurrent
+      tooltip: Current Progress step
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: ProgressTotal
+      tooltip: Total steps to finish the game (min=8)
+      showInInspector: 0
+      networkSync: 0
+      value: 12
+    - useVariable: 1
+      name: PowerboxStarValue
+      tooltip: Increase in X the current score amount
+      showInInspector: 0
+      networkSync: 0
+      value: 5
+    - useVariable: 1
+      name: ExerciseSplitValue
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: ExerciseFailCount
+      tooltip: Cantidad de fails (para mostrar ayuda)
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: SplitValueSelected
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    boolVariables:
+    - useVariable: 1
+      name: TTSenabled
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 1
+    - useVariable: 1
+      name: CanOperate
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: CanTransportate
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: IntoStationB
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: IntoStationA
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: hasSavedData
+      tooltip: Variable que indica si existen partidas previas guardadas
+      showInInspector: 0
+      networkSync: 0
+      value: 1
+    - useVariable: 1
+      name: MusicEnabled
+      tooltip: BGM Music
+      showInInspector: 0
+      networkSync: 0
+      value: 1
+    stringVariables:
+    - useVariable: 1
+      name: SceneName
+      tooltip: Scene name to load after loading LOL SDK
+      showInInspector: 0
+      networkSync: 0
+      value: mainmenu
+    - useVariable: 1
+      name: Language
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: es
+    - useVariable: 1
+      name: SceneL1Name
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: level1
+    - useVariable: 1
+      name: SceneL2Name
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: level2
+    - useVariable: 1
+      name: SceneL3Name
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: level3
+    - useVariable: 1
+      name: SceneMainMenuName
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: mainmenu
+    - useVariable: 1
+      name: AvatarNameNPC
+      tooltip: Name for display the avatar picture in dialogue panel
+      showInInspector: 0
+      networkSync: 0
+      value: NPC
+    - useVariable: 1
+      name: SceneInitName
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: _init
+    vector2Variables: []
+    vector3Variables: []
+    colorVariables: []
+    rectVariables: []
+    quaternionVariables: []
+    gameObjectVariables: []
+    objectVariables: []
+    materialVariables: []
+    textureVariables: []
+    arrayVariables: []
+    enumVariables: []
+    categories:
+    - 
+    - '- GAMEPLAY -'
+    - '- SETTINGS -'
+    variableCategoryIDs: 0200000002000000020000000200000002000000020000000100000001000000010000000200000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000002000000020000000100000002000000020000000200000002000000020000000200000002000000010000000200000002000000
+  events: []

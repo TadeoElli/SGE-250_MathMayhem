@@ -1,0 +1,76 @@
+Instructivo de Configuración: Dialogue System
+
+1. Preparar los GameObjects y Scripts en la Escena
+a. GameObject principal del UI de Diálogo
+•	Crea un GameObject vacío llamado, por ejemplo, DialogueUI.
+•	Agrega el script TXSDialogueUI a este GameObject.
+•	Configura los campos públicos del componente:
+•	dialoguePanel: Asigna el panel de UI que contiene el texto y los controles del diálogo.
+•	dialogueText: Asigna el componente TMP_Text (TextMeshPro) donde se mostrará el texto del diálogo.
+•	audioSource: Asigna un componente AudioSource para reproducir sonidos de tipeo/TTS.
+•	charactersContainer: Asigna el objeto padre que contiene los avatares (GameObjects hijos con nombres únicos).
+•	clickIndicator: Asigna el objeto visual que indica cuándo se puede avanzar el diálogo.
+b. GameObject del Manager
+•	Crea un GameObject vacío llamado, por ejemplo, DialogueManager.
+•	Agrega el script TXSDialogueManager a este GameObject.
+---
+
+2. Configurar Avatares
+•	Dentro de charactersContainer, crea un GameObject hijo por cada avatar que quieras mostrar.
+•	El nombre del GameObject debe coincidir exactamente con el nombre que usarás en el array de avatares en el custom action.
+•	Puedes desactivar todos los avatares por defecto; el sistema activará el correspondiente en cada línea.
+---
+
+3. Configurar el Custom Action "ShowDialogue" en PlayMaker
+•	En el FSM donde quieras mostrar un diálogo, agrega la acción personalizada ShowDialogue (categoría "TXS").
+•	Configura los campos:
+•	dialogueKeys: Array de strings con las claves de las líneas de diálogo (deben coincidir con las claves en language.json).
+•	avatarObjectNames: (Opcional) Array de strings con los nombres de los avatares a mostrar por línea. Si se deja vacío, se usará el campo singleAvatarName.
+•	singleAvatarName: (Opcional) Nombre de un avatar único para todas las líneas.
+•	volume, textSpeed, clickDelayOffset, typingVolume: (Opcional) Ajustes de audio y velocidad.
+•	targetGameObject, selectedFSMName, eventToSend: (Opcional) Para enviar eventos a otros FSMs al finalizar el diálogo.
+•	onComplete: Evento local a disparar al finalizar el diálogo.
+---
+
+4. Estructura de language.json
+El archivo debe estar en Assets/StreamingAssets/language.json.
+Ejemplo:
+{
+  "es": {
+    "linea1": "¡<b>Hola</b>! ¿Cómo estás?",
+    "linea1tts": "Hola, ¿cómo estás?",
+    "linea2": "Bienvenido al <b>juego</b>.",
+    "linea2tts": "Bienvenido al juego."
+  },
+  "en": {
+    "linea1": "<b>Hello</b>! How are you?",
+    "linea1tts": "Hello, how are you?",
+    "linea2": "Welcome to the <b>game</b>.",
+    "linea2tts": "Welcome to the game."
+  }
+}
+Cada clave de diálogo tiene su versión TTS opcional agregando el sufijo tts. Si no existe, muestra la linea original.
+---
+
+5. Configuración de TTS
+•	El sistema detecta si TTS está habilitado mediante la variable global de PlayMaker TTSenabled (tipo Bool).
+•	Si está activado, se usará la línea con sufijo tts para la síntesis de voz.
+•	Puedes ajustar el volumen y la velocidad de TTS en el componente TXSDialogueUI.
+---
+
+6. Consideraciones Adicionales
+•	Idioma: El sistema usa la variable global Language (tipo String) para seleccionar el idioma.
+•	Inicialización: Asegúrate de que el SDK (LocalSDK.Init()) se ejecute antes de mostrar diálogos para cargar los textos.
+•	Eventos: Usa los campos de eventos en la acción para disparar lógica personalizada al finalizar el diálogo.
+•	Avatares: Si usas avatares, asegúrate de que los nombres coincidan exactamente entre el array y los GameObjects hijos de charactersContainer.
+---
+
+
+Resumen
+1.	Crea y configura los GameObjects con los scripts TXSDialogueUI y TXSDialogueManager.
+2.	Prepara los avatares como hijos de charactersContainer.
+3.	Usa la acción ShowDialogue en PlayMaker y configura los campos.
+4.	Escribe las líneas de diálogo en language.json siguiendo la estructura recomendada.
+5.	Configura TTS y variables globales según sea necesario.
+---
+
