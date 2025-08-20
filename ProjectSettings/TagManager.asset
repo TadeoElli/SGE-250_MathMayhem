@@ -10,6 +10,9 @@ TagManager:
   - Armor
   - Invisible
   - Avatar
+  - PowerUp
+  - Nexus
+  - Missiles
   layers:
   - Default
   - TransparentFX
@@ -44,6 +47,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1060920373
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MiddleBackground
+    uniqueID: 1661125449
+    locked: 0
+  - name: Middle
+    uniqueID: 2834931173
+    locked: 0
+  - name: MiddleForeGround
+    uniqueID: 3941280711
+    locked: 0
+  - name: FrontGround
+    uniqueID: 3496061517
     locked: 0
