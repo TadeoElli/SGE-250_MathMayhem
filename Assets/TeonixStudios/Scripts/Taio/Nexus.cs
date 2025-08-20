@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Clase Nexus maneja proyectiles ("números"), interactúa con el cursor para posicionar y lanzar.
@@ -12,7 +13,7 @@ public class Nexus : MonoBehaviour
     [Header("Estado actual")]
     private float currentDistance = 0f;       // Distancia del mouse al nexo
     private float currentSpeed = 0f;          // Velocidad con la que se lanzará el misil
-
+    [SerializeField] PlayerInput inputs;
     [Header("Configuración y referencias")]
     [SerializeField] private int index;             // Índice del misil a crear
     [SerializeField] private GameObject mouseOverMissile;
@@ -56,14 +57,20 @@ public class Nexus : MonoBehaviour
 
         if (mouseOverMissile != null)
             mouseOverMissile.SetActive(false);
+        EnableInputs();
     }
     
     private void OnDisable()
     {
         DisableNexus();
     }
+
+    private void EnableInputs()
+    {
+        inputs.Gamepl;
+    }
     #endregion
-    
+
     #region ShootMechanic
 
     private void Update()
