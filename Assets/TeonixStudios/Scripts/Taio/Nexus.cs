@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /// <summary>
 /// Clase Nexus maneja proyectiles ("números"), interactúa con el cursor para posicionar y lanzar.
@@ -10,14 +9,11 @@ public class Nexus : MonoBehaviour
 {
     public static Nexus Instance { get; private set; }
     #region Properties
-    [Header("Estado actual")]
-    private float currentDistance = 0f;       // Distancia del mouse al nexo
-    private float currentSpeed = 0f;          // Velocidad con la que se lanzará el misil
-    [SerializeField] PlayerInput inputs;
     [Header("Configuración y referencias")]
-    [SerializeField] private int index;             // Índice del misil a crear
+    [SerializeField] private float index;             // Índice del misil a crear
     [SerializeField] private GameObject mouseOverMissile;
     [SerializeField] private GameObject missilePrefab;
+    private Missile missileComp;
     [SerializeField] private CircleCollider2D collider1;
 
     [SerializeField] private bool pauseState = true;
@@ -57,7 +53,8 @@ public class Nexus : MonoBehaviour
 
         if (mouseOverMissile != null)
             mouseOverMissile.SetActive(false);
-        EnableInputs();
+
+        StartState();
     }
     
     private void OnDisable()
@@ -65,10 +62,6 @@ public class Nexus : MonoBehaviour
         DisableNexus();
     }
 
-    private void EnableInputs()
-    {
-        inputs.Gamepl;
-    }
     #endregion
 
     #region ShootMechanic
@@ -85,7 +78,6 @@ public class Nexus : MonoBehaviour
                 currentPoint.z = 0;
 
                 Vector3 direction = currentPoint - startPoint;
-
                 // Limitar la distancia máxima del mouse al startPoint
                 if (direction.magnitude > 2f)
                 {
@@ -128,8 +120,6 @@ public class Nexus : MonoBehaviour
             Mathf.Clamp(startPoint.x - currentPoint.x, minPower.x, maxPower.x),
             Mathf.Clamp(startPoint.y - currentPoint.y, minPower.y, maxPower.y));
 
-        currentSpeed = (force * 5f).magnitude;
-        currentDistance = Vector2.Distance(currentPoint, startPoint);
     }
 
     /// <summary>
@@ -163,9 +153,6 @@ public class Nexus : MonoBehaviour
         if (mouseOverMissile != null)
             mouseOverMissile.transform.position = transform.position;
 
-        currentSpeed = 0f;
-        currentDistance = 0f;
-
         HideFeedback();
 
         isDragging = false;
@@ -178,10 +165,12 @@ public class Nexus : MonoBehaviour
     private IEnumerator DelayForSpawn()
     {
         yield return new WaitForSeconds(2f);
-
+        missilePrefab = MissilePool.Instance.RequestMissile();
         if (missilePrefab != null)
         {
             missilePrefab.GetComponent<Collider2D>().enabled = false;
+            missileComp = missilePrefab.GetComponent<Missile>();
+            missileComp.SetNumberValue(index);
             haveMissile = true;
         }
     }
@@ -248,12 +237,8 @@ public class Nexus : MonoBehaviour
     public void SetMissileIndex(int newIndex)
     {  //Recive el indice del NexusStats y modifica el indice local
         index = newIndex;
-        if (haveMissile)
-        {    //Y si tenia un misil activo en ese momento, lo desactivo y activo el nuevo con el nuevo indice
-            missilePrefab.SetActive(false);
-            //missilePrefab = missiles[index].CreateMissile(transform);
-            missilePrefab.GetComponent<Collider2D>().enabled = false;
-        }
+        if(haveMissile && missileComp != null)
+            missileComp.SetNumberValue(index);
     }
     #endregion
 }
