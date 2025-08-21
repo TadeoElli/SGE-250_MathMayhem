@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using UnityEngine;
 
 public class MissilePool : MonoBehaviour
@@ -48,14 +49,14 @@ public class MissilePool : MonoBehaviour
     {
         GameObject missile = Instantiate(missilePrefab);
         missile.SetActive(false);
-        missile.transform.parent = transform;
+        missile.transform.SetParent(transform);
         missilePool.Add(missile);
     }
 
     /// <summary>
     /// Solicita un misil de la pool. Si no hay inactivos, crea uno nuevo.
     /// </summary>
-    public GameObject RequestMissile()
+    public GameObject RequestMissile(Transform origin)
     {
         // Buscar uno inactivo
         GameObject missileToReturn = missilePool.Find(m => !m.activeSelf);
@@ -67,6 +68,7 @@ public class MissilePool : MonoBehaviour
         }
 
         missileToReturn.SetActive(true);
+        missileToReturn.transform.position = origin.position;
         return missileToReturn;
     }
 }

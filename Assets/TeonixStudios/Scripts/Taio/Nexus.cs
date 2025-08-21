@@ -129,6 +129,9 @@ public class Nexus : MonoBehaviour
     {
         if (missilePrefab == null) return;
 
+        missileComp = missilePrefab.GetComponent<Missile>();
+        if (missileComp != null)
+            missileComp.ShootBehaviour();
         force = new Vector2(
             Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
             Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
@@ -165,7 +168,7 @@ public class Nexus : MonoBehaviour
     private IEnumerator DelayForSpawn()
     {
         yield return new WaitForSeconds(2f);
-        missilePrefab = MissilePool.Instance.RequestMissile();
+        missilePrefab = MissilePool.Instance.RequestMissile(transform);
         if (missilePrefab != null)
         {
             missilePrefab.GetComponent<Collider2D>().enabled = false;

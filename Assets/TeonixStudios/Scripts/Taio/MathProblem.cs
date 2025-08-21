@@ -9,7 +9,7 @@ public class MathProblem : MonoBehaviour
     [SerializeField]private float speed = 0.25f;
     private float direction;        //La direccion en la que se mueve
     private float rotationSpeed = 1;
-    [HideInInspector] public bool normalDir = false;        //si se va a mover en la direccion normal (hacia la izquierda) o no, se setea desde el spawner
+    [SerializeField] public bool normalDir = true;        //si se va a mover en la direccion normal (hacia la izquierda) o no, se setea desde el spawner
     private float timer;
 
     private Collider2D col;
@@ -25,8 +25,8 @@ public class MathProblem : MonoBehaviour
     private OperatorType opType;
 
     [SerializeField] private TextMeshProUGUI textComp;
-    public delegate void OnEnemyDeath(int amount);
-    public OnEnemyDeath notifyKillCount, notifyScore;
+    public delegate void OnEnemyDeath();
+    public OnEnemyDeath notifyScore;
 
 
     #region Initialization
@@ -95,8 +95,7 @@ public class MathProblem : MonoBehaviour
     }
     private void Death()
     {       //Comportamiento de muerte
-        notifyKillCount?.Invoke(1);
-        notifyScore?.Invoke(10);
+        notifyScore?.Invoke();
         this.gameObject.SetActive(false);       //Desactiva este objeto
     }
 
@@ -162,7 +161,8 @@ public class MathProblem : MonoBehaviour
     }
     public void CheckMathResult(float value)
     {
-
+        if (value == correctNumber)
+            Death();
     }
     #endregion
 }
