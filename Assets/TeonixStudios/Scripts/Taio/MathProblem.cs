@@ -27,6 +27,7 @@ public class MathProblem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textComp;
     public delegate void OnEnemyDeath();
     public OnEnemyDeath notifyScore;
+    private Animator animator;
 
 
     #region Initialization
@@ -34,6 +35,7 @@ public class MathProblem : MonoBehaviour
     {
         col = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -96,6 +98,11 @@ public class MathProblem : MonoBehaviour
     private void Death()
     {       //Comportamiento de muerte
         notifyScore?.Invoke();
+        animator.SetTrigger("Death");
+    }
+
+    private void Deactivate()
+    {
         this.gameObject.SetActive(false);       //Desactiva este objeto
     }
 

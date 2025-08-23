@@ -15,6 +15,7 @@ public class Missile : MonoBehaviour
     private void OnEnable()
     {   //Declaro las estadisticas
         numberValue = 0;
+        bounces = 5;
         textComp.text = numberValue.ToString();
     }
 

@@ -64,6 +64,7 @@ public class MathSpawner : MonoBehaviour
             GameObject enemy = CreateMathProblem();  //Crea un enemigo
             enemy.transform.position = spawn.position; //Lo coloca en la posicion del spawn point
         }
+        hasToSpawnAGroup = false;
         _spawnTimerForProblem = 0f;
     }
 
