@@ -54,7 +54,7 @@ public class Nexus : MonoBehaviour
         if (mouseOverMissile != null)
             mouseOverMissile.SetActive(false);
 
-        StartState();
+        //StartState();
     }
     
     private void OnDisable()

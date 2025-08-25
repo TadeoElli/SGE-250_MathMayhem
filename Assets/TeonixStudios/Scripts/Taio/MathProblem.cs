@@ -16,7 +16,7 @@ public class MathProblem : MonoBehaviour
     private Rigidbody2D rb2D;
 
     [Header("Math")]
-    [SerializeField] private DifficultyLevel difficulty = DifficultyLevel.Easy;
+    [HideInInspector] public DifficultyLevel difficulty;
     private int correctNumber;        // Número entre 0-9 que completa la fórmula
     private float resultValue;        // Resultado final de la fórmula (0 - 100)
 
@@ -28,7 +28,7 @@ public class MathProblem : MonoBehaviour
     public delegate void OnEnemyDeath();
     public OnEnemyDeath notifyScore;
     private Animator animator;
-
+    private bool isDead = false;
 
     #region Initialization
     private void Awake()
@@ -41,6 +41,12 @@ public class MathProblem : MonoBehaviour
     private void OnEnable()
     {
         col.enabled = false;
+        isDead = false;
+    }
+
+    public void Initialize(DifficultyLevel newDifficulty)
+    {
+        difficulty = newDifficulty;
         GenerateFormula();
         UpdateFormulaText();
         StartCoroutine(DelayForActivateCollider());
@@ -98,6 +104,7 @@ public class MathProblem : MonoBehaviour
     private void Death()
     {       //Comportamiento de muerte
         notifyScore?.Invoke();
+        isDead = true;
         animator.SetTrigger("Death");
     }
 
@@ -168,7 +175,7 @@ public class MathProblem : MonoBehaviour
     }
     public void CheckMathResult(float value)
     {
-        if (value == correctNumber)
+        if (value == correctNumber && !isDead)
             Death();
     }
     #endregion

@@ -4,15 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - NPC
-  - Ground
-  - Armor
-  - Invisible
-  - Avatar
-  - PowerUp
-  - Nexus
-  - Missiles
+  - Problem
   layers:
   - Default
   - TransparentFX

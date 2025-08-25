@@ -16,6 +16,6 @@ public class GoalLine : MonoBehaviour
     }
     private void GameOver()
     {
-
+        Debug.Log("Finish");
     }
 }

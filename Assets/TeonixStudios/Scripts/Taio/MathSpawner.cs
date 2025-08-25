@@ -19,13 +19,24 @@ public class MathSpawner : MonoBehaviour
     public float _spawnIntervalForProblem;    //El intervalo en el que se spawnean nuevos problemas
     public float _spawnIntervalForGroup;    //El intervalo en el que se spawnean nuevos grupos de problemas
 
+    private bool hasStarted = false;
+    [SerializeField] private DifficultyLevel difficulty = DifficultyLevel.Easy;
+
     void Start()
     {
+        hasStarted = false;
+    }
+
+    public void StartLevel()
+    {
+        hasStarted = true;
         SpawnGroupOfEnemies();
     }
+    public void SetDifficultyEasy() { difficulty = DifficultyLevel.Easy;}
+    public void SetDifficultyHard() { difficulty = DifficultyLevel.Hard;}
     void Update()
     {
-
+        if(!hasStarted) return;
         _spawnTimerForProblem += Time.deltaTime;
         _spawnTimerForGroup += Time.deltaTime;
         //Chequea si es tiempo para spawnear un siguiente enemigo grupo
@@ -72,6 +83,7 @@ public class MathSpawner : MonoBehaviour
     {  //Creo un enemigo
         GameObject problem = _pool.RequestMathProblem(transform);   //Spawnea un enemigo con ese indice
         problem.transform.rotation =  Quaternion.Euler(0f, 0f, 90);    //Setea su rotacion
+        problem.GetComponent<MathProblem>().Initialize(difficulty);
         return problem;
     }
 
