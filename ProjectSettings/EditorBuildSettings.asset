@@ -6,21 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/TeonixStudios/Scenes/_init.unity
-    guid: ac8d2f807f553874681df976fc7b640b
-  - enabled: 1
-    path: Assets/TeonixStudios/Scenes/mainmenu.unity
-    guid: f305afc727dabd7408f9e5c9e9ce0da2
-  - enabled: 1
-    path: Assets/TeonixStudios/Scenes/level12.unity
-    guid: 4dc463733b29a004a859d6386588fea0
-  - enabled: 1
-    path: Assets/TeonixStudios/Scenes/level2.unity
-    guid: 8c180c7658da3cf47a81032da2f6a578
-  - enabled: 1
-    path: Assets/TeonixStudios/Scenes/level3.unity
-    guid: 7e41f064b855000458ef46818e09bb9e
-  - enabled: 1
     path: Assets/TeonixStudios/Scenes/level1.unity
     guid: 183886d8218ef1d43a53ac37b521c8e5
+  - enabled: 0
+    path: Assets/TeonixStudios/Scenes/mainmenu.unity
+    guid: f305afc727dabd7408f9e5c9e9ce0da2
+  - enabled: 0
+    path: Assets/TeonixStudios/Scenes/_init.unity
+    guid: ac8d2f807f553874681df976fc7b640b
+  - enabled: 0
+    path: Assets/TeonixStudios/Scenes/level12.unity
+    guid: 4dc463733b29a004a859d6386588fea0
+  - enabled: 0
+    path: Assets/TeonixStudios/Scenes/level2.unity
+    guid: 8c180c7658da3cf47a81032da2f6a578
+  - enabled: 0
+    path: Assets/TeonixStudios/Scenes/level3.unity
+    guid: 7e41f064b855000458ef46818e09bb9e
   m_configObjects: {}

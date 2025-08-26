@@ -71,4 +71,13 @@ public class MissilePool : MonoBehaviour
         missileToReturn.transform.position = origin.position;
         return missileToReturn;
     }
+    public void DeactivatesAllNumbers()
+    {
+        Missile[] arrayOfnumbers = GetComponentsInChildren<Missile>();
+
+        foreach (var problem in arrayOfnumbers)
+        {
+            problem.gameObject.SetActive(false);
+        }
+    }
 }

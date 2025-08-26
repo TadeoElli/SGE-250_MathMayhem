@@ -236,6 +236,12 @@ public class Nexus : MonoBehaviour
 
         StartCoroutine(DelayForSpawn());
     }
+    public void StopState()
+    {
+        pauseState = true;
+        if(haveMissile)
+            missilePrefab.SetActive(false);
+    }
 
     public void SetMissileIndex(int newIndex)
     {  //Recive el indice del NexusStats y modifica el indice local

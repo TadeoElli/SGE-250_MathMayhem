@@ -32,6 +32,12 @@ public class MathSpawner : MonoBehaviour
         hasStarted = true;
         SpawnGroupOfEnemies();
     }
+    public void StopLevel()
+    {
+        hasStarted = false;
+        _spawnTimerForProblem = 0;
+        _spawnTimerForGroup = 0;
+    }
     public void SetDifficultyEasy() { difficulty = DifficultyLevel.Easy;}
     public void SetDifficultyHard() { difficulty = DifficultyLevel.Hard;}
     void Update()

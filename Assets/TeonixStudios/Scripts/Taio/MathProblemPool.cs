@@ -15,6 +15,7 @@ public class MathProblemPool : MonoBehaviour
     Stopwatch stopwatch = new Stopwatch();
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI finishText;
     private int cantOfResults = 0;
 
 
@@ -29,6 +30,20 @@ public class MathProblemPool : MonoBehaviour
     private void Start()
     {
         StartCoroutine(AddMathProblemsToPoolCoroutine());
+    }
+    public void DeactivatesAllMathProblems()
+    {
+        MathProblem[] arrayOfProblems = GetComponentsInChildren<MathProblem>();
+
+        foreach (var problem in arrayOfProblems)
+        {
+            problem.gameObject.SetActive(false);
+        }
+        finishText.text = cantOfResults.ToString();
+        UnityEngine.Debug.Log(cantOfResults.ToString());
+        cantOfResults = 0;
+        UnityEngine.Debug.Log(cantOfResults.ToString());
+        scoreText.text = cantOfResults.ToString();
     }
 
     private IEnumerator AddMathProblemsToPoolCoroutine()
