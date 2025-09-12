@@ -15,7 +15,7 @@ public class Nexus : MonoBehaviour
     [SerializeField] private GameObject missilePrefab;
     private Missile missileComp;
     [SerializeField] private CircleCollider2D collider1;
-
+    [SerializeField] private AudioClip throwClip;
     [SerializeField] private bool pauseState = true;
     [SerializeField] private bool haveMissile = false;
 
@@ -144,6 +144,8 @@ public class Nexus : MonoBehaviour
         Collider2D col = missilePrefab.GetComponent<Collider2D>();
         if (col != null)
             col.enabled = true;
+
+        AudioManager.Instance.PlaySoundEffect(throwClip);
     }
 
     /// <summary>

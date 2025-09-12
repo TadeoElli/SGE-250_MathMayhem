@@ -23,7 +23,7 @@ public class MathProblem : MonoBehaviour
     private int operand;
     private int operandResult;
     private OperatorType opType;
-
+    [SerializeField] private AudioClip bounceClip, deathClip;
     [SerializeField] private TextMeshProUGUI textComp;
     public delegate void OnEnemyDeath();
     public OnEnemyDeath notifyScore;
@@ -100,12 +100,17 @@ public class MathProblem : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         timer = 0;  //resetea el timer para que se vuelva a incorporar
+        AudioManager.Instance.PlaySoundEffect(bounceClip);
     }
     private void Death()
     {       //Comportamiento de muerte
         notifyScore?.Invoke();
         isDead = true;
         animator.SetTrigger("Death");
+    }
+    public void DeathSound()
+    {
+        AudioManager.Instance.PlaySoundEffect(deathClip);
     }
 
     private void Deactivate()

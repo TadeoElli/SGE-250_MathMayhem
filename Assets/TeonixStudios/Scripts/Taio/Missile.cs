@@ -11,6 +11,7 @@ public class Missile : MonoBehaviour
     float numberValue;
     [SerializeField] private TextMeshProUGUI textComp;
     [SerializeField] private int bounces = 5;
+    [SerializeField] private AudioClip bounceClip;
  
     private void OnEnable()
     {   //Declaro las estadisticas
@@ -34,6 +35,8 @@ public class Missile : MonoBehaviour
         bounces--;
         if (bounces <= 0)
             Death();
+        else
+            AudioManager.Instance.PlaySoundEffect(bounceClip);
     }
 
     public void ShootBehaviour()

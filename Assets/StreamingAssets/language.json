@@ -1,9 +1,10 @@
 {
   "en": {
     "langCode": "en",
-	"startGame": "Start Game",
 	"howToPlay": "How To Play",
-	"volume": "Volume",
+	"start": "Start Game",
+	"music": "Music",
+	"sounds": "Sounds",
 	"difficulty": "Difficulty",
 	"easy": "Easy",
 	"normal": "Normal",
@@ -24,9 +25,10 @@ To throw a number, press the mouse button on it and then drag it in a direction.
   },
   "es": {
     "langCode": "es",
-	"startGame": "Empezar Juego",
 	"howToPlay": "Como Jugar",
-	"volume": "Volumen",
+	"start": "Empezar Juego",
+	"music": "Musica",
+	"sounds": "Sonidos",
 	"difficulty": "Dificultad",
 	"easy": "Facil",
 	"normal": "Normal",
