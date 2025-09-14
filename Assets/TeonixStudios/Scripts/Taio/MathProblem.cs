@@ -266,12 +266,12 @@ public class MathProblem : MonoBehaviour
     }
     public void CheckMathResult(float value)
     {
-        if (value == correctNumber && !isDead)
+        if (((value == correctNumber) || (value == correctFraction.ToFloat()))&& !isDead)
             Death();
     }
     public void CheckMathResult(Fraction value)
     {
-        if (Fraction.Equals(value, correctFraction) && !isDead)
+        if ((value.ToFloat() ==  correctFraction.ToFloat()) && !isDead)
             Death();
     }
     #endregion

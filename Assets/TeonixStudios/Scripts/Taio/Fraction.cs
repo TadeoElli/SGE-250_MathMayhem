@@ -16,6 +16,7 @@ public struct Fraction
         Simplify();
     }
 
+    public float ToFloat() => (float)numerator / denominator;
     // Simplifica la fracción reduciéndola al mínimo común divisor
     public void Simplify()
     {

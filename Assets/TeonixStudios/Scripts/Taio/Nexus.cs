@@ -251,5 +251,10 @@ public class Nexus : MonoBehaviour
         if(haveMissile && missileComp != null)
             missileComp.SetNumberValue(index);
     }
+    public void SetDivide()
+    {
+        if(haveMissile && missileComp != null)
+            missileComp.ChangeValueToFraction();
+    }
     #endregion
 }

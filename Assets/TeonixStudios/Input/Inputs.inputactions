@@ -96,6 +96,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Divide",
+                    "type": "Button",
+                    "id": "590333fa-9315-4609-8c5a-4b8d3eb1e042",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Desactivate",
                     "type": "Button",
                     "id": "2f18270c-ca98-4b5a-bab1-45b391561f2c",
@@ -165,6 +174,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse;Touch",
                     "action": "SetMissile9",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "efa3836c-ec3e-46a3-87cb-25c31b2d1e59",
+                    "path": "<Keyboard>/slash",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Touch",
+                    "action": "Divide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0db2366f-39d5-4416-ace9-73286264d16f",
+                    "path": "<Keyboard>/numpadDivide",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Touch",
+                    "action": "Divide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
