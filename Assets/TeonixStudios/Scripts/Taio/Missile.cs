@@ -8,30 +8,58 @@ using System.Collections;
 /// </summary>
 public class Missile : MonoBehaviour
 {
-    float numberValue;
+    int numerator;
+    int denominator;
+    Fraction fractionValue;
     [SerializeField] private TextMeshProUGUI textComp;
     [SerializeField] private int bounces = 5;
     [SerializeField] private AudioClip bounceClip;
+    private bool isFraction = false;
  
     private void OnEnable()
     {   //Declaro las estadisticas
-        numberValue = 0;
+        numerator = 0;
+        denominator = 0;
         bounces = 5;
-        textComp.text = numberValue.ToString();
+        isFraction = false;
+        textComp.text = numerator.ToString();
     }
 
-    public void SetNumberValue(float newNumber)
+    public void SetNumberValue(int newNumber)
     {
-        numberValue = newNumber;
-        textComp.text = numberValue.ToString();
+        if (isFraction && newNumber == 0)
+            return;
+        else if(isFraction)
+        {
+            denominator = newNumber;
+            fractionValue = new Fraction(numerator,denominator);
+            textComp.text = numerator.ToString() + "/" + denominator.ToString();
+        }
+        else
+        {
+            numerator = newNumber;
+            textComp.text = numerator.ToString();
+        }
+    }
+    public void ChangeValueToFraction()
+    {
+        if(numerator == 0)
+            return ;
+        isFraction = true;
+        textComp.text = numerator.ToString() + "/";
     }
 
     //Comportamiento cuando collisiona con un objeto
     private void OnCollisionEnter2D(Collision2D other)
     {
         MathProblem problem = other.gameObject.GetComponent<MathProblem>();
-        if (problem != null) 
-            problem.CheckMathResult(numberValue);
+        if (problem != null)
+        {
+            if(isFraction)
+                problem.CheckMathResult(fractionValue);
+            else
+                problem.CheckMathResult(numerator);
+        }
         bounces--;
         if (bounces <= 0)
             Death();

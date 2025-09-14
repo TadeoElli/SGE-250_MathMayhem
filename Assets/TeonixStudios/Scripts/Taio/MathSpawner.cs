@@ -39,6 +39,7 @@ public class MathSpawner : MonoBehaviour
         _spawnTimerForGroup = 0;
     }
     public void SetDifficultyEasy() { difficulty = DifficultyLevel.Easy;}
+    public void SetDifficultyNormal() { difficulty = DifficultyLevel.Normal;}
     public void SetDifficultyHard() { difficulty = DifficultyLevel.Hard;}
     void Update()
     {

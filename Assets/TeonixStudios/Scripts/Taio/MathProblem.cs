@@ -18,17 +18,22 @@ public class MathProblem : MonoBehaviour
     [Header("Math")]
     [HideInInspector] public DifficultyLevel difficulty;
     private int correctNumber;        // Número entre 0-9 que completa la fórmula
-    private float resultValue;        // Resultado final de la fórmula (0 - 100)
+    private Fraction correctFraction;
 
     private int operand;
     private int operandResult;
+    private Fraction operandFractionResult;
+    private Fraction operandFraction;
     private OperatorType opType;
     [SerializeField] private AudioClip bounceClip, deathClip;
     [SerializeField] private TextMeshProUGUI textComp;
+    [SerializeField] private RectTransform textTransform, borderTransform;
     public delegate void OnEnemyDeath();
     public OnEnemyDeath notifyScore;
     private Animator animator;
     private bool isDead = false;
+    private Coroutine lerpCoroutine;
+    [SerializeField] private BoxCollider2D boxCollider;
 
     #region Initialization
     private void Awake()
@@ -47,7 +52,16 @@ public class MathProblem : MonoBehaviour
     public void Initialize(DifficultyLevel newDifficulty)
     {
         difficulty = newDifficulty;
-        GenerateFormula();
+        if (difficulty == DifficultyLevel.Hard)
+        {
+            Debug.Log("SetHard");
+            GenerateFractionFormula();
+        }
+        else
+        {
+            Debug.Log("Set" + difficulty.ToString());
+            GenerateFormula();
+        }
         UpdateFormulaText();
         StartCoroutine(DelayForActivateCollider());
     }
@@ -111,6 +125,30 @@ public class MathProblem : MonoBehaviour
     public void DeathSound()
     {
         AudioManager.Instance.PlaySoundEffect(deathClip);
+        // Iniciar lerp del ancho a 0 en 0.1 segundos
+        if (lerpCoroutine != null)
+            StopCoroutine(lerpCoroutine);
+        lerpCoroutine = StartCoroutine(LerpWidthToZero(0.1f));
+    }
+    private IEnumerator LerpWidthToZero(float duration)
+    {
+        float elapsed = 0f;
+        float startWidth = textTransform.sizeDelta.x;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float newWidth = Mathf.Lerp(startWidth, 0f, t);
+            Vector2 size = textTransform.sizeDelta;
+            size.x = newWidth;
+            textTransform.sizeDelta = size;
+            yield return null;
+        }
+        // Asegurar que quede a 0 exacto
+        Vector2 finalSize = textTransform.sizeDelta;
+        finalSize.x = 0f;
+        textTransform.sizeDelta = finalSize;
     }
 
     private void Deactivate()
@@ -131,7 +169,7 @@ public class MathProblem : MonoBehaviour
             // Solo suma o resta
             opType = (Random.value < 0.5f) ? OperatorType.Sum : OperatorType.Subtract;
         }
-        else
+        else if(difficulty == DifficultyLevel.Normal)
         {
             // Puede ser cualquiera
             int op = Random.Range(0, 4);
@@ -161,6 +199,45 @@ public class MathProblem : MonoBehaviour
         }
     }
 
+    private void GenerateFractionFormula()
+    {
+        // Generar incógnita fraccionaria con denominador != 0
+        int num = Random.Range(0, 10);
+        int den;
+        do
+        {
+            den = Random.Range(1, 10);
+        } while (den == 0);
+
+        correctFraction = new Fraction(num, den);
+
+        // Puede ser cualquiera
+        int op = Random.Range(0, 4);
+        opType = (OperatorType)op;
+
+        // Generar operandos acorde a operador y resultado deseado
+        switch (opType)
+        {
+            case OperatorType.Sum: //Para suma eligo dos numeros random entre 1 y 9 y creo una fraccion con esos numeros para que sea el resultado, y luego saco el operando restandole al resultado la fraccion correcta
+                operandFractionResult = new Fraction(Random.Range(1,9), Random.Range(1, 9));
+                operandFraction = operandFractionResult - correctFraction;
+                break;
+            case OperatorType.Subtract: //Para la resta eligo dos numeros random entre 1 y 9 para que sea el resultado, y luego saco el operando sumandole al resultado la fraccion correcta
+                operandFractionResult = new Fraction(Random.Range(1, 9), Random.Range(1, 9));
+                operandFraction = operandFractionResult + correctFraction;
+                break;
+            case OperatorType.Multiply:
+                // Para mult, elijo una fraccion random como operando y el resultado sera el operando * la fraccion correcto
+                operandFraction = new Fraction(Random.Range(1, 9), Random.Range(1, 9)); 
+                operandFractionResult = correctFraction * operandFraction;
+                break;
+            case OperatorType.Divide: // para div elijo un numero random entre 1 y 10 para el resultado y el operando sera ese numero multiplicado por el numero correcto
+                operandFractionResult = new Fraction(Random.Range(1, 9), Random.Range(1, 9));
+                operandFraction = operandFractionResult * correctFraction;
+                break;
+        }
+    }
+
 
     /// <summary>
     /// Actualiza la UI de la fórmula (texto), ejemplo: "A + B"
@@ -175,12 +252,26 @@ public class MathProblem : MonoBehaviour
             case OperatorType.Multiply: opSymbol = "×"; break;
             case OperatorType.Divide: opSymbol = "÷"; break;
         }
-        if (textComp != null)
+        if (textComp == null) return;
+        if (difficulty == DifficultyLevel.Hard)
+        {
+            textComp.text = $"{operandFraction.ToString()} {opSymbol} X = {operandFractionResult.ToString()}";
+        }
+        else
             textComp.text = $"{operand} {opSymbol} X = {operandResult}";
+        Vector2 newSize = new Vector2(textComp.preferredWidth, textComp.preferredHeight);
+        borderTransform.sizeDelta = newSize;
+        textTransform.sizeDelta = newSize;
+        boxCollider.size = new Vector2(textComp.preferredHeight,textComp.preferredWidth);
     }
     public void CheckMathResult(float value)
     {
         if (value == correctNumber && !isDead)
+            Death();
+    }
+    public void CheckMathResult(Fraction value)
+    {
+        if (Fraction.Equals(value, correctFraction) && !isDead)
             Death();
     }
     #endregion

@@ -10,7 +10,7 @@ public class Nexus : MonoBehaviour
     public static Nexus Instance { get; private set; }
     #region Properties
     [Header("Configuración y referencias")]
-    [SerializeField] private float index;             // Índice del misil a crear
+    [SerializeField] private int index;             // Índice del misil a crear
     [SerializeField] private GameObject mouseOverMissile;
     [SerializeField] private GameObject missilePrefab;
     private Missile missileComp;
